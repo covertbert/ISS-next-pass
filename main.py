@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from geopy.geocoders import Nominatim
 
-GEOLOCATOR = Nominatim()
+GEO_LOCATOR = Nominatim()
 
 
 def address_input():
@@ -15,7 +15,7 @@ def build_location_array():
     """ Builds an array of data containing lat and long and returns it """
 
     # Gets location data based on input
-    location_data = GEOLOCATOR.geocode(address_input())
+    location_data = GEO_LOCATOR.geocode(address_input())
 
     return [location_data.address, location_data.latitude, location_data.longitude]
 
