@@ -68,7 +68,7 @@ def output_date(iss_date):
 
 
 def init():
-    """ Takes next-rise time stamp, converts it to human readable and prints"""
+    """ Initialises most of the things"""
 
     # Assign rise data
     iss_data = get_iss_rise_time()
@@ -78,6 +78,7 @@ def init():
     # Create date object from data
     datetime_object = datetime.strptime(str(date_time), '%Y-%m-%d %H:%M:%S')
 
+    # Print the output to the command line
     print 'The ISS will next pass over %s %s' % (address, output_date(datetime_object))
 
 init()
