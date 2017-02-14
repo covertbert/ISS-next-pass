@@ -2,6 +2,7 @@ import urllib2
 import json
 from datetime import datetime
 from geopy.geocoders import Nominatim
+import time
 
 GEO_LOCATOR = Nominatim()
 
@@ -38,7 +39,35 @@ def get_iss_rise_time():
     return [address, next_rise_timestamp]
 
 
-def output_iss_rise_data():
+def output_date(iss_date):
+    """ Takes the ISS date object as a parameter and determines if that date is today or tomorrow or other"""
+
+    # Assign basic ISS date variables
+    iss_next_pass_full_date = iss_date.strftime('%Y-%m-%d')
+    iss_next_pass_year_month = iss_date.strftime('%Y-%m')
+    iss_next_pass_day = iss_date.strftime('%d')
+
+    # Assign basic today's date variables
+    today_full_date = time.strftime('%Y-%m-%d')
+    today_year_month = time.strftime('%Y-%m')
+    today_day = time.strftime('%d')
+
+    # Split ISS date object into component parts from string building
+    day = iss_date.strftime('%d')
+    month = iss_date.strftime('%m')
+    year = iss_date.strftime('%Y')
+    the_time = iss_date.strftime('%H:%M:%S')
+
+    # If date is today return today. If date is tomorrow, return tomorrow. Else return False
+    if iss_next_pass_full_date == today_full_date:
+        return 'today at %s' % the_time
+    elif iss_next_pass_year_month == today_year_month and int(iss_next_pass_day) == int(today_day) + 1:
+        return 'tomorrow at %s' % the_time
+    else:
+        return 'on %s/%s/%s at %s' % (day, month, year, the_time)
+
+
+def init():
     """ Takes next-rise time stamp, converts it to human readable and prints"""
 
     # Assign rise data
@@ -49,12 +78,6 @@ def output_iss_rise_data():
     # Create date object from data
     datetime_object = datetime.strptime(str(date_time), '%Y-%m-%d %H:%M:%S')
 
-    # Split date object into component parts from string building
-    day = datetime_object.strftime('%d')
-    month = datetime_object.strftime('%m')
-    year = datetime_object.strftime('%Y')
-    time = datetime_object.strftime('%H:%M:%S')
+    print 'The ISS will next pass over %s %s' % (address, output_date(datetime_object))
 
-    print 'The ISS will next pass over %s on %s/%s/%s at %s' % (address, day, month, year, time)
-
-output_iss_rise_data()
+init()
