@@ -24,7 +24,7 @@ def build_location_array():
 
 
 def get_iss_rise_time():
-    """ Takes location data, queries ISS Api for next pass data and returns it"""
+    """ Takes location data, queries ISS Api for next pass data and returns it """
 
     # Assigning the location data to variables for later use
     location_data = build_location_array()
@@ -43,7 +43,7 @@ def get_iss_rise_time():
 
 
 def output_date(iss_date):
-    """ Takes ISS date object as parameter and determines if date is today, tomorrow or other"""
+    """ Takes ISS date object as parameter and determines if date is today, tomorrow or other """
 
     # Assign basic ISS date variables
     iss_next_pass_full_date = iss_date.strftime('%Y-%m-%d')
@@ -71,7 +71,7 @@ def output_date(iss_date):
 
 
 def init():
-    """ Initialises most of the things"""
+    """ Initialises most of the things """
 
     # Assign rise data
     iss_data = get_iss_rise_time()
