@@ -34,7 +34,8 @@ def get_iss_rise_time():
     api_url = 'http://api.open-notify.org/iss-pass.json'
 
     # API request and handling of location data
-    api_request = '%s?lat=%s&lon=%s&alt=20&n=20' % (api_url, latitude, longitude)
+    api_request = '%s?lat=%s&lon=%s&alt=20&n=20' % (
+        api_url, latitude, longitude)
     response = urllib2.urlopen(api_request)
     iss_pass_object = json.loads(response.read())
     next_rise_timestamp = iss_pass_object['response'][0]['risetime']
@@ -61,7 +62,8 @@ def output_date(iss_date):
     year = iss_date.strftime('%Y')
     the_time = iss_date.strftime('%H:%M:%S')
 
-    # If date is today return today. If date is tomorrow, return tomorrow. Else return False
+    # If date is today return today. If date is tomorrow, return tomorrow.
+    # Else return False
     if iss_next_pass_full_date == today_full_date:
         return 'today at %s' % the_time
     elif iss_next_pass_y_m == today_year_month and int(iss_next_pass_day) == int(today_day) + 1:
